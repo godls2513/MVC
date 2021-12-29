@@ -5,11 +5,11 @@
 <mapper namespace="kr.bit.mybatis.MemberMapper">
   
     <select id="memberList" resultType="memberVO">
-       select * from member1
+       select * from member2
     </select>
     
     <insert id="memberInsert" parameterType="memberVO">
-        insert into member1(id, pass, name, age, email, phone)
+        insert into member2(id, pass, name, age, email, phone)
         values(
         #{id},
         #{pass},
@@ -21,7 +21,7 @@
     </insert>
     
     <insert id="memberInsertFile" parameterType="memberVO">
-        insert into member1(id, pass, name, age, email, phone, filename)
+        insert into member2(id, pass, name, age, email, phone, filename)
         values(
         #{id},
         #{pass},
@@ -38,19 +38,31 @@
     </delete>
     
     <select id="memberContent" parameterType="Integer" resultType="memberVO">        
-        select * from member1 where num=#{num}
+        select * from member2 where num=#{num}
     </select>
     
     <update id="memberUpdate" parameterType="memberVO">
-         update member1 
+         update member2 
          set age=#{age}, email=#{email}, phone=#{phone} 
          where num=#{num}	 
     </update>
     
     <select id="memberLogin" parameterType="memberVO" resultType="String">
-        select name from member1 where id=#{id} and pass=#{pass}       
+        select name from member2 where id=#{id} and pass=#{pass}       
     </select>
     <select id="memberDbcheck" resultType="String" parameterType="String">
-        select id from member1 where id=#{id} 
+        select id from member2 where id=#{id} 
     </select>
+    
+    <update id="memberDeleteFile" parameterType="Integer">
+        update member2 set filename='' where num=#{num}
+    </update>
+
+    <update id="memberUpdateFile" parameterType="memberVO">
+				update member2 
+				set age=#{age}, email=#{email}, phone=#{phone}, filename=#{filename}
+				where num=#{num}
+    </update>
+    
+    
 </mapper>
